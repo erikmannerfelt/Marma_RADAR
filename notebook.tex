@@ -1,0 +1,747 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{RADAR preparation2}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{Import statements}\label{import-statements}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{datetime}
+        \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{stats}
+        \PY{k+kn}{import} \PY{n+nn}{time}
+        \PY{k+kn}{import} \PY{n+nn}{pickle}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{gpxpy}
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot} \PY{k}{as} \PY{n}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{pyproj}
+        \PY{k+kn}{import} \PY{n+nn}{georaster} \PY{k}{as} \PY{n+nn}{gr}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\end{Verbatim}
+
+
+    \subsection{File structure}\label{file-structure}
+
+The relations of each file to the specific flight are noted here.
+
+\textbf{radar\_data} specifies the interpreted shot count - return time
+data. \textbf{tracks} specifies the track gpx (or custom pickled format)
+name and \textbf{wpt\_sync} specifies which method to use for
+synchronizing the RADAR and GNSS time: using waypoint/shot count or GNSS
+time / shot count. \textbf{waypoints} specifies the gpx waypoint file to
+use, if that type of synchronization is chosen. \textbf{sync\_file}
+specifies the relation between waypoint number, or GNSS time, and shot
+count. \textbf{doubled} is a boolean value for if the x-values in
+\textbf{radar\_data} are stretched to twice their length (to help the
+previous interpretation part).
+
+A folder named \textbf{input} should be present in the same folder as
+the script. In this folder, five subfolders: \textbf{a\_radar\_data,
+b\_shot\_vs\_wpt, b\_waypoints, c\_tracks} should be present, as well as
+\textbf{data\_structure.csv}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{structure} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{input/data\PYZus{}structure.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+        
+        \PY{n}{structure}  \PY{c+c1}{\PYZsh{} Preview}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:}                      radar\_data           tracks  wpt\_sync  \textbackslash{}
+        name                                                         
+        erik1      erik1\_out\_171212.txt     MARMA17C.gpx      True   
+        erik2      erik2\_out\_171212.txt     MARMA17C.gpx      True   
+        erik3      erik3\_out\_171212.txt     MARMA17C.gpx      True   
+        klara2    klara2\_out\_171212.txt   2014\_radar.gpx     False   
+        anders1  anders1\_out\_171220.txt  anders1\_track.p     False   
+        
+                              waypoints            sync\_file  doubled  
+        name                                                           
+        erik1    Marma17C Waypoints.gpx  erik1\_waypoints.csv    False  
+        erik2    Marma17C Waypoints.gpx  erik2\_waypoints.csv    False  
+        erik3    Marma17C Waypoints.gpx  erik3\_waypoints.csv    False  
+        klara2                      NaN     klara2\_times.csv     True  
+        anders1                     NaN    anders1\_times.csv     True  
+\end{Verbatim}
+            
+    \section{Main analysis}\label{main-analysis}
+
+    \subsection{Step A: Read RADAR data}\label{step-a-read-radar-data}
+
+This step reads the radar data csv table and formats it to a Pandas
+DataFrame.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{def} \PY{n+nf}{a\PYZus{}read\PYZus{}radar}\PY{p}{(}\PY{n}{in\PYZus{}data}\PY{p}{,} \PY{n}{flight}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Reads radar csv tables and formats them to a DataFrame}
+        \PY{l+s+sd}{    :param flights: List of flights to process.}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{doubled} \PY{o}{=} \PY{n}{structure}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{flight}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{doubled}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+            
+            \PY{n}{values} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{input/a\PYZus{}radar\PYZus{}data/}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{structure}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{flight}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{radar\PYZus{}data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+            
+            \PY{n}{values}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+            \PY{n}{values}\PY{o}{.}\PY{n}{y} \PY{o}{=} \PY{n}{values}\PY{o}{.}\PY{n}{y} \PY{o}{*} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}  \PY{c+c1}{\PYZsh{} The y\PYZhy{}values should be positive}
+        
+            \PY{k}{if} \PY{n}{doubled}\PY{p}{:}  \PY{c+c1}{\PYZsh{} If x\PYZhy{}axis was doubled during interpretation}
+                \PY{n}{values}\PY{o}{.}\PY{n}{x} \PY{o}{=} \PY{n}{values}\PY{o}{.}\PY{n}{x} \PY{o}{*} \PY{l+m+mf}{0.5}
+        
+            \PY{k}{return} \PY{n}{values}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{typ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Data preview}
+        \PY{n}{preview\PYZus{}data} \PY{o}{=} \PY{k+kc}{None}
+        \PY{n}{preview\PYZus{}data} \PY{o}{=} \PY{n}{a\PYZus{}read\PYZus{}radar}\PY{p}{(}\PY{n}{preview\PYZus{}data}\PY{p}{,} \PY{n}{flight}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{erik1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{preview\PYZus{}data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}          x          y   typ
+        0  5.87538  20.885000  mark
+        1  6.75358  21.539000  mark
+        2  7.63178  22.192900  mark
+        3  8.50998  22.846901  mark
+        4  9.38818  23.500900  mark
+\end{Verbatim}
+            
+    \subsection{Step B: Synchronize shot count with GNSS
+time}\label{step-b-synchronize-shot-count-with-gnss-time}
+
+The step uses the RADAR 'x-values' (shot count) and waypoints (their
+timestamps), or hard coded GNSS times, to synchronize the RADAR data.
+The function uses linear regression to correlate these parameters, which
+therefore accounts for possible inaccuracies in the \textbf{sync\_file}
+due to human error.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{def} \PY{n+nf}{b\PYZus{}shot\PYZus{}sync}\PY{p}{(}\PY{n}{in\PYZus{}data}\PY{p}{,} \PY{n}{flight}\PY{p}{,} \PY{n}{evaluation}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Uses a \PYZsq{}X\PYZhy{}value to waypoint/time stamp\PYZsq{} synchronisation file, alternatively with a waypoint GPX\PYZhy{}file, to synchronise shot count with the GNSS time.\PYZdq{}\PYZdq{}\PYZdq{}}
+        
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Syncs time based on radar data and synchronisation file. The latter is X\PYZhy{}values in relation to either waypoints or time stamps.}
+        \PY{l+s+sd}{    :param flight: Flight name}
+        \PY{l+s+sd}{    :type flight: String\PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{data} \PY{o}{=} \PY{n}{in\PYZus{}data}
+        
+            \PY{c+c1}{\PYZsh{} Read structure table}
+            \PY{n}{waypoint\PYZus{}gpx} \PY{o}{=} \PY{n}{structure}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{flight}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{waypoints}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}  \PY{c+c1}{\PYZsh{} Name of waypoint gpx file, if needed}
+            \PY{n}{sync\PYZus{}file} \PY{o}{=} \PY{n}{structure}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{flight}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sync\PYZus{}file}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}  \PY{c+c1}{\PYZsh{} Synchronisation file}
+            \PY{n}{wpt\PYZus{}sync} \PY{o}{=} \PY{n}{structure}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{flight}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wpt\PYZus{}sync}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}  \PY{c+c1}{\PYZsh{} Boolean: If synchronisation should be done with waypoints}
+        
+            \PY{c+c1}{\PYZsh{} If synchronisation should be done with waypoints}
+            \PY{k}{if} \PY{n}{wpt\PYZus{}sync}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} Load waypoints gpx}
+                \PY{n}{gpx} \PY{o}{=} \PY{n}{gpxpy}\PY{o}{.}\PY{n}{parse}\PY{p}{(}\PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{input/b\PYZus{}waypoints/}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{waypoint\PYZus{}gpx}\PY{p}{)}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} Get waypoints (as name as int) and respective time (in Unix time)}
+                \PY{n}{wpts} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{p}{[}\PY{n}{time}\PY{o}{.}\PY{n}{mktime}\PY{p}{(}\PY{n}{wpt}\PY{o}{.}\PY{n}{time}\PY{o}{.}\PY{n}{timetuple}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{wpt} \PY{o+ow}{in} \PY{n}{gpx}\PY{o}{.}\PY{n}{waypoints}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{wpt}\PY{o}{.}\PY{n}{name}\PY{p}{)} \PY{k}{for} \PY{n}{wpt} \PY{o+ow}{in} \PY{n}{gpx}\PY{o}{.}\PY{n}{waypoints}\PY{p}{]}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} Load csv with x values for respective waypoint}
+                \PY{n}{wpt\PYZus{}x} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{input/b\PYZus{}shot\PYZus{}vs\PYZus{}wpt/}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{sync\PYZus{}file}\PY{p}{,} \PY{n}{squeeze}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} Use waypoint names to get respective time}
+                \PY{n}{x\PYZus{}times} \PY{o}{=} \PY{n}{wpt\PYZus{}x}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{wpts}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} If synchronisation should be done using time stamps}
+            \PY{k}{else}\PY{p}{:}
+                \PY{n}{x\PYZus{}times} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{input/b\PYZus{}shot\PYZus{}vs\PYZus{}wpt/}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{sync\PYZus{}file}\PY{p}{,} \PY{n}{squeeze}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                \PY{n}{x\PYZus{}times} \PY{o}{=} \PY{n}{x\PYZus{}times}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{time}\PY{o}{.}\PY{n}{mktime}\PY{p}{(}\PY{n}{datetime}\PY{o}{.}\PY{n}{datetime}\PY{o}{.}\PY{n}{strptime}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{/}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{m/}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{Y }\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{H:}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{M:}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{S}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{timetuple}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} If evaluation is True, return a graph of x\PYZhy{}values in relation to time (Unix\PYZhy{}time)}
+            \PY{k}{if} \PY{n}{evaluation}\PY{p}{:}
+                \PY{n}{x\PYZus{}times}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{marker}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{+}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{flight}\PY{p}{)}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Regression between X\PYZhy{}values and Unix\PYZhy{}times. Extract m\PYZhy{}value (where x=0) and convert back to DateTime}
+            \PY{n}{x\PYZus{}0} \PY{o}{=} \PY{n}{datetime}\PY{o}{.}\PY{n}{datetime}\PY{o}{.}\PY{n}{fromtimestamp}\PY{p}{(}\PY{n}{stats}\PY{o}{.}\PY{n}{linregress}\PY{p}{(}\PY{n}{x\PYZus{}times}\PY{o}{.}\PY{n}{index}\PY{p}{,} \PY{n+nb}{list}\PY{p}{(}\PY{n}{x\PYZus{}times}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Make new column \PYZdq{}time\PYZdq{} using the x\PYZus{}0 time added with the amount of shots divided by two (shoots twice a second)}
+            \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{time}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x\PYZus{}0} \PY{o}{+} \PY{n}{datetime}\PY{o}{.}\PY{n}{timedelta}\PY{p}{(}\PY{n}{seconds}\PY{o}{=}\PY{n}{x} \PY{o}{/} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+            \PY{n}{data} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{time}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{typ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}  \PY{c+c1}{\PYZsh{} Make time column the index, and only keep y and typ}
+        
+            \PY{c+c1}{\PYZsh{} Resample the data in 1s intervals, and make columns with depth for each signal.}
+            \PY{n}{types} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{typ}\PY{p}{:} \PY{n}{typ\PYZus{}df}\PY{o}{.}\PY{n}{resample}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{1S}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{typ}\PY{p}{,} \PY{n}{typ\PYZus{}df} \PY{o+ow}{in} \PY{n}{data}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{typ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{\PYZcb{}}
+            
+            \PY{k}{return} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{types}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Data preview}
+        \PY{n}{preview\PYZus{}data} \PY{o}{=} \PY{n}{b\PYZus{}shot\PYZus{}sync}\PY{p}{(}\PY{n}{preview\PYZus{}data}\PY{p}{,} \PY{n}{flight}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{erik1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{preview\PYZus{}data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}                      fuffens  glacier       mark
+        time                                            
+        2017-04-07 13:12:10      NaN      NaN  20.885000
+        2017-04-07 13:12:11      NaN      NaN  22.192933
+        2017-04-07 13:12:12      NaN      NaN  23.827900
+        2017-04-07 13:12:13      NaN      NaN  25.135799
+        2017-04-07 13:12:14      NaN      NaN  26.443800
+\end{Verbatim}
+            
+    \subsection{Step C: Georeference the RADAR data using the GNSS
+track}\label{step-c-georeference-the-radar-data-using-the-gnss-track}
+
+First, a GPX track loading function has to be defined. It also projects
+the input WGS 1984 coordinates into the specified projected system
+(epsg:3006 = SWEREF 99TM).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{def} \PY{n+nf}{load\PYZus{}track}\PY{p}{(}\PY{n}{in\PYZus{}track\PYZus{}gpx}\PY{p}{,} \PY{n}{out\PYZus{}crs}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{epsg:3006}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n}{in\PYZus{}track\PYZus{}gpx}\PY{o}{.}\PY{n}{endswith}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{.gpx}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                \PY{n}{gpx} \PY{o}{=} \PY{n}{gpxpy}\PY{o}{.}\PY{n}{parse}\PY{p}{(}\PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{input/c\PYZus{}tracks/}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{in\PYZus{}track\PYZus{}gpx}\PY{p}{)}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} Extract data for DataFrame}
+                \PY{n}{gpx\PYZus{}data} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{k}{for} \PY{n}{track} \PY{o+ow}{in} \PY{n}{gpx}\PY{o}{.}\PY{n}{tracks}\PY{p}{:}
+                    \PY{k}{for} \PY{n}{segment} \PY{o+ow}{in} \PY{n}{track}\PY{o}{.}\PY{n}{segments}\PY{p}{:}
+                        \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{point} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{segment}\PY{o}{.}\PY{n}{points}\PY{p}{)}\PY{p}{:}
+                            \PY{c+c1}{\PYZsh{} Append list of properties to gpx\PYZus{}data list}
+                            \PY{n}{gpx\PYZus{}data}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{point}\PY{o}{.}\PY{n}{longitude}\PY{p}{,} \PY{n}{point}\PY{o}{.}\PY{n}{latitude}\PY{p}{,}
+                                             \PY{n}{point}\PY{o}{.}\PY{n}{elevation}\PY{p}{,} \PY{n}{point}\PY{o}{.}\PY{n}{time}\PY{p}{]}\PY{p}{)}  \PY{c+c1}{\PYZsh{} segment.get\PYZus{}speed(i) should be added if speed is important again}
+        
+                \PY{c+c1}{\PYZsh{} Make DataFrame from gpx data with time as index}
+                \PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Longitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Latitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Altitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                \PY{n}{gpx\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{gpx\PYZus{}data}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n}{columns}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Time}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Exception made for anders1 flight}
+            \PY{k}{elif} \PY{n}{in\PYZus{}track\PYZus{}gpx}\PY{o}{.}\PY{n}{endswith}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{.p}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                \PY{n}{gpx\PYZus{}df} \PY{o}{=} \PY{n}{pickle}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{input/c\PYZus{}tracks/}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{in\PYZus{}track\PYZus{}gpx}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rb}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Project geographic coordinates to SWEREF 99TM}
+            \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{row} \PY{o+ow}{in} \PY{n}{gpx\PYZus{}df}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                \PY{n}{in\PYZus{}proj} \PY{o}{=} \PY{n}{pyproj}\PY{o}{.}\PY{n}{Proj}\PY{p}{(}\PY{n}{init}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{epsg:4326}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                \PY{n}{out\PYZus{}proj} \PY{o}{=} \PY{n}{pyproj}\PY{o}{.}\PY{n}{Proj}\PY{p}{(}\PY{n}{init}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{epsg:3006}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+                \PY{n}{x}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{pyproj}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{in\PYZus{}proj}\PY{p}{,} \PY{n}{out\PYZus{}proj}\PY{p}{,} \PY{n}{row}\PY{o}{.}\PY{n}{Longitude}\PY{p}{,} \PY{n}{row}\PY{o}{.}\PY{n}{Latitude}\PY{p}{)}
+        
+                \PY{n}{gpx\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Easting}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{x}
+                \PY{n}{gpx\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Northing}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{y}
+        
+            \PY{k}{return} \PY{n}{gpx\PYZus{}df}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Easting}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Northing}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Altitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+
+
+    With the correct time of the shots being known in the previous step, the
+GNSS and RADAR data can simply be joined using the time index.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{def} \PY{n+nf}{c\PYZus{}georeference}\PY{p}{(}\PY{n}{in\PYZus{}data}\PY{p}{,} \PY{n}{flight}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Uses a \PYZsq{}track GPX\PYZsq{} file to georeference the synchronised input data\PYZdq{}\PYZdq{}\PYZdq{}}
+        
+            \PY{c+c1}{\PYZsh{} Load gpx file as DataFrame}
+            \PY{n}{track\PYZus{}gpx} \PY{o}{=} \PY{n}{structure}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{flight}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tracks}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+            \PY{n}{gpx\PYZus{}df} \PY{o}{=} \PY{n}{load\PYZus{}track}\PY{p}{(}\PY{n}{track\PYZus{}gpx}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Load radar data}
+            \PY{n}{data} \PY{o}{=} \PY{n}{in\PYZus{}data}
+        
+            \PY{c+c1}{\PYZsh{} Join gpx data with radar data using previously synchronised time}
+            \PY{n}{joined} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{gpx\PYZus{}df}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Drop rows with no georeferencing (needed if GNSS frequency is low)}
+            \PY{c+c1}{\PYZsh{} Could in future version be replaced by averaging. The nature of the initial boundary drawing is not noisy however.}
+            \PY{n}{joined}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{n}{subset}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Easting}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        
+            \PY{k}{return} \PY{n}{joined}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Easting}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Northing}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Altitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mark}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{glacier}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{fuffens}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Data preview}
+        \PY{n}{preview\PYZus{}data} \PY{o}{=} \PY{n}{c\PYZus{}georeference}\PY{p}{(}\PY{n}{preview\PYZus{}data}\PY{p}{,} \PY{n}{flight}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{erik1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{preview\PYZus{}data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:}                            Easting      Northing  Altitude       mark  \textbackslash{}
+        time                                                                    
+        2017-04-07 13:12:10  655094.668964  7.556852e+06   1304.17  20.885000   
+        2017-04-07 13:12:11  655094.976135  7.556852e+06   1305.61  22.192933   
+        2017-04-07 13:12:12  655095.494686  7.556851e+06   1307.05  23.827900   
+        2017-04-07 13:12:13  655096.097525  7.556852e+06   1309.93  25.135799   
+        2017-04-07 13:12:14  655096.384325  7.556852e+06   1309.93  26.443800   
+        
+                             glacier  fuffens  
+        time                                   
+        2017-04-07 13:12:10      NaN      NaN  
+        2017-04-07 13:12:11      NaN      NaN  
+        2017-04-07 13:12:12      NaN      NaN  
+        2017-04-07 13:12:13      NaN      NaN  
+        2017-04-07 13:12:14      NaN      NaN  
+\end{Verbatim}
+            
+    \subsection{Step D: Shot return time to altitude
+conversion}\label{step-d-shot-return-time-to-altitude-conversion}
+
+Takes the input return time values and converts them to reflectance
+distance, and then to altitude using the GNSS altitudes. Since the
+signal travels in a vastly different speed through air vs. in ice, this
+is accounted for.
+
+The distance to the glacier surface (if there is any at that specific
+shot) is first measured using air speed. The englacial signal time is
+then defined using the following formula: \[ INSERT\ FORMULA\ HERE\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{def} \PY{n+nf}{d\PYZus{}depth\PYZus{}from\PYZus{}y}\PY{p}{(}\PY{n}{in\PYZus{}data}\PY{p}{,} \PY{n}{flight}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Takes intensity (y) values and converts them to GNSS derived altitude\PYZdq{}\PYZdq{}\PYZdq{}}
+        
+            \PY{n}{data} \PY{o}{=} \PY{n}{in\PYZus{}data}
+        
+            \PY{c+c1}{\PYZsh{} RADAR signal velocities}
+            \PY{n}{v0} \PY{o}{=} \PY{l+m+mi}{300}  \PY{c+c1}{\PYZsh{} In air}
+            \PY{n}{v1} \PY{o}{=} \PY{l+m+mi}{170}  \PY{c+c1}{\PYZsh{} In ice}
+        
+            \PY{k}{def} \PY{n+nf}{depth\PYZus{}ice}\PY{p}{(}\PY{n}{val}\PY{p}{,} \PY{n}{glacier}\PY{p}{)}\PY{p}{:}  \PY{c+c1}{\PYZsh{} In cases with glacier penetration (including air travel time)}
+                \PY{k}{return} \PY{p}{(}\PY{n}{glacier} \PY{o}{+} \PY{n}{v1} \PY{o}{*} \PY{p}{(}\PY{n}{val} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{n}{glacier} \PY{o}{/} \PY{n}{v0}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{512}
+        
+            \PY{k}{def} \PY{n+nf}{depth\PYZus{}air}\PY{p}{(}\PY{n}{val}\PY{p}{)}\PY{p}{:}  \PY{c+c1}{\PYZsh{} In cases without glacier penetration.}
+                \PY{k}{return} \PY{p}{(}\PY{n}{val} \PY{o}{/} \PY{l+m+mi}{512}\PY{p}{)} \PY{o}{*} \PY{n}{v0}
+        
+            \PY{c+c1}{\PYZsh{} Split data set to data with or without glacier penetration}
+            \PY{n}{glacier\PYZus{}data} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{glacier}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{notnull}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+            \PY{n}{mark\PYZus{}data} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{glacier}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Calculate depth for values featuring no glacier penetration (only through air)}
+            \PY{n}{glacier\PYZus{}data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{glacier}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{depth\PYZus{}air}\PY{p}{(}\PY{n}{glacier\PYZus{}data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{glacier}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Only passes through air}
+            \PY{n}{mark\PYZus{}data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mark}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{depth\PYZus{}air}\PY{p}{(}\PY{n}{mark\PYZus{}data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mark}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Calculate depth for values featuring glacier penetration}
+            \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{row} \PY{o+ow}{in} \PY{n}{glacier\PYZus{}data}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mark}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{fuffens}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{:}
+                    \PY{n}{glacier\PYZus{}data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{col}\PY{p}{]} \PY{o}{=} \PY{n}{depth\PYZus{}ice}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{p}{,} \PY{n}{row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{glacier}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Concatenate the two split DataFrames}
+            \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{glacier\PYZus{}data}\PY{p}{,} \PY{n}{mark\PYZus{}data}\PY{p}{]}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Convert depths to altitudes by comparing with GNSS altitude}
+            \PY{n}{data}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mark}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{fuffens}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{glacier}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mark}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{fuffens}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{glacier}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Altitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{x}\PY{p}{)}
+        
+            \PY{k}{return} \PY{n}{data}
+        
+        \PY{c+c1}{\PYZsh{} Data preview}
+        \PY{n}{preview\PYZus{}data} \PY{o}{=} \PY{n}{d\PYZus{}depth\PYZus{}from\PYZus{}y}\PY{p}{(}\PY{n}{preview\PYZus{}data}\PY{p}{,} \PY{n}{flight}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{erik1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{preview\PYZus{}data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:}                            Easting      Northing  Altitude         mark  \textbackslash{}
+        time                                                                      
+        2017-04-07 13:12:43  654751.191551  7.556778e+06   1360.88  1320.291297   
+        2017-04-07 13:12:44  654730.516824  7.556773e+06   1364.73  1320.017450   
+        2017-04-07 13:12:45  654709.780404  7.556768e+06   1367.61  1319.315854   
+        2017-04-07 13:12:46  654689.071580  7.556764e+06   1370.98  1319.483181   
+        2017-04-07 13:12:47  654668.241804  7.556759e+06   1370.98  1316.283127   
+        
+                                 glacier  fuffens  
+        time                                       
+        2017-04-07 13:12:43  1310.845568      NaN  
+        2017-04-07 13:12:44  1315.031895      NaN  
+        2017-04-07 13:12:45  1318.248221      NaN  
+        2017-04-07 13:12:46  1321.954550      NaN  
+        2017-04-07 13:12:47  1322.290821      NaN  
+\end{Verbatim}
+            
+    \subsection{Step E: Altitude correction using
+DEM}\label{step-e-altitude-correction-using-dem}
+
+Since the GNSS altitude measurements are unreliable, the altitudes of
+every point is corrected using the glacier surface. The average offset
+is also applied onto data points with no glacier surface.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{} E: Correct altitude to DEM}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        
+        \PY{k}{def} \PY{n+nf}{e\PYZus{}correct\PYZus{}alt}\PY{p}{(}\PY{n}{in\PYZus{}data}\PY{p}{,} \PY{n}{flight}\PY{p}{)}\PY{p}{:}
+            \PY{n}{data} \PY{o}{=} \PY{n}{in\PYZus{}data}
+        
+            \PY{n}{glacier\PYZus{}data} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{glacier}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{notnull}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+            \PY{n}{mark\PYZus{}data} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{glacier}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+        
+            \PY{n}{dem} \PY{o}{=} \PY{n}{gr}\PY{o}{.}\PY{n}{SingleBandRaster}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{D:/Erik/Dokument/Maps/Mårma/Mårmaglaciären/Temp/Marma17\PYZus{}DEM\PYZus{}031017.tif}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+            \PY{n}{differences} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{row} \PY{o+ow}{in} \PY{n}{glacier\PYZus{}data}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                \PY{n}{diff} \PY{o}{=} \PY{n}{dem}\PY{o}{.}\PY{n}{value\PYZus{}at\PYZus{}coords}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Easting}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Northing}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{glacier}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+        
+                \PY{n}{differences}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{diff}\PY{p}{)}
+        
+                \PY{n}{glacier\PYZus{}data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Altitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{glacier}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mark}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{fuffens}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n}{diff}
+        
+            \PY{n}{mark\PYZus{}data}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Altitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mark}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{differences}\PY{p}{)}
+        
+            \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{glacier\PYZus{}data}\PY{p}{,} \PY{n}{mark\PYZus{}data}\PY{p}{]}\PY{p}{)}
+        
+            \PY{k}{return} \PY{n}{data}
+        
+        \PY{c+c1}{\PYZsh{} Data preview}
+        \PY{n}{preview\PYZus{}data} \PY{o}{=} \PY{n}{e\PYZus{}correct\PYZus{}alt}\PY{p}{(}\PY{n}{preview\PYZus{}data}\PY{p}{,} \PY{n}{flight}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{erik1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{preview\PYZus{}data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:}                            Easting      Northing     Altitude         mark  \textbackslash{}
+        time                                                                         
+        2017-04-07 13:12:43  654751.191551  7.556778e+06  1387.095101  1346.506398   
+        2017-04-07 13:12:44  654730.516824  7.556773e+06  1389.608750  1344.896200   
+        2017-04-07 13:12:45  654709.780404  7.556768e+06  1392.207238  1343.913092   
+        2017-04-07 13:12:46  654689.071580  7.556764e+06  1394.448790  1342.951971   
+        2017-04-07 13:12:47  654668.241804  7.556759e+06  1397.742890  1343.046018   
+        
+                                 glacier  fuffens  
+        time                                       
+        2017-04-07 13:12:43  1337.060669      NaN  
+        2017-04-07 13:12:44  1339.910645      NaN  
+        2017-04-07 13:12:45  1342.845459      NaN  
+        2017-04-07 13:12:46  1345.423340      NaN  
+        2017-04-07 13:12:47  1349.053711      NaN  
+\end{Verbatim}
+            
+    \subsection{Main application loop}\label{main-application-loop}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k}{def} \PY{n+nf}{prepare\PYZus{}radar}\PY{p}{(}\PY{n}{flights}\PY{p}{,} \PY{n}{save}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{tag}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{180228}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{unified}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{evaluation}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+            \PY{c+c1}{\PYZsh{} Flight selections}
+            \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        
+            \PY{c+c1}{\PYZsh{} If \PYZsq{}all\PYZsq{} is entered, use every flight in the structure table indices}
+            \PY{k}{if} \PY{n}{flights} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{all}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+                \PY{n}{flights} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{structure}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{values}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} If input is a single flight as a string, convert it to a list for compatibility}
+            \PY{k}{elif} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{flights}\PY{p}{,} \PY{n+nb}{str}\PY{p}{)}\PY{p}{:}
+                \PY{n}{flights} \PY{o}{=} \PY{p}{[}\PY{n}{flights}\PY{p}{]}
+        
+            \PY{c+c1}{\PYZsh{} Properties of the different steps}
+            \PY{n}{steps} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{b}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{c}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{e}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+            \PY{n}{functions} \PY{o}{=} \PY{p}{[}\PY{n}{a\PYZus{}read\PYZus{}radar}\PY{p}{,} \PY{n}{b\PYZus{}shot\PYZus{}sync}\PY{p}{,} \PY{n}{c\PYZus{}georeference}\PY{p}{,} \PY{n}{d\PYZus{}depth\PYZus{}from\PYZus{}y}\PY{p}{,} \PY{n}{e\PYZus{}correct\PYZus{}alt}\PY{p}{]}
+            \PY{n}{step\PYZus{}function} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{steps}\PY{p}{,} \PY{n}{functions}\PY{p}{)}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+            \PY{c+c1}{\PYZsh{} Perform steps}
+            \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+            \PY{n}{data} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+            \PY{n}{flight\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Needed to not raise an error at A}
+            \PY{k}{for} \PY{n}{flight} \PY{o+ow}{in} \PY{n}{flights}\PY{p}{:}
+                \PY{k}{for} \PY{n}{step} \PY{o+ow}{in} \PY{n}{steps}\PY{p}{:}
+                    \PY{n}{flight\PYZus{}data} \PY{o}{=} \PY{n}{step\PYZus{}function}\PY{p}{[}\PY{n}{step}\PY{p}{]}\PY{p}{(}\PY{n}{flight\PYZus{}data}\PY{p}{,} \PY{n}{flight}\PY{p}{)}
+                
+                \PY{c+c1}{\PYZsh{} Add flight data to data dictionary}
+                \PY{n}{data}\PY{p}{[}\PY{n}{flight}\PY{p}{]} \PY{o}{=} \PY{n}{flight\PYZus{}data}
+                
+                \PY{c+c1}{\PYZsh{} Save data}
+                \PY{k}{if} \PY{n}{save} \PY{o+ow}{and} \PY{o+ow}{not} \PY{n}{unified}\PY{p}{:}
+                    \PY{n}{flight\PYZus{}data}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data/}\PY{l+s+si}{\PYZob{}flight\PYZcb{}}\PY{l+s+s2}{\PYZus{}}\PY{l+s+si}{\PYZob{}tag\PYZcb{}}\PY{l+s+s2}{.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Option to return a DataFrame with a flight column, instead of dictionary with flight as a key}
+            \PY{k}{if} \PY{n}{unified}\PY{p}{:}
+                \PY{n}{all\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{)}
+                \PY{k}{for} \PY{n}{name}\PY{p}{,} \PY{n}{df} \PY{o+ow}{in} \PY{n}{work\PYZus{}data}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{name}
+                    \PY{n}{all\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{all\PYZus{}data}\PY{p}{,} \PY{n}{df}\PY{p}{]}\PY{p}{)}
+                \PY{n}{all\PYZus{}data}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data/unified\PYZus{}}\PY{l+s+si}{\PYZob{}tag\PYZcb{}}\PY{l+s+s2}{.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                
+                \PY{k}{return} \PY{n}{all\PYZus{}data}
+            
+            \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{flights}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+                \PY{k}{return} \PY{n}{flight\PYZus{}data}
+            \PY{k}{else}\PY{p}{:}
+                \PY{k}{return} \PY{n}{data}
+            
+        \PY{c+c1}{\PYZsh{} Data preview}
+        \PY{n}{data} \PY{o}{=} \PY{n}{prepare\PYZus{}radar}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{erik1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{erik2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{save}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{k+kn}{import} \PY{n+nn}{os}\PY{p}{;} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data/}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} ['erik1\_180228.csv', 'erik2\_180228.csv']
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

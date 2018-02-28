@@ -1,0 +1,6 @@
+name,radar_data,tracks,wpt_sync,waypoints,sync_file,doubled
+erik1,erik1_out_171212.txt,MARMA17C.gpx,TRUE,Marma17C Waypoints.gpx,erik1_waypoints.csv,FALSE
+erik2,erik2_out_171212.txt,MARMA17C.gpx,TRUE,Marma17C Waypoints.gpx,erik2_waypoints.csv,FALSE
+erik3,erik3_out_171212.txt,MARMA17C.gpx,TRUE,Marma17C Waypoints.gpx,erik3_waypoints.csv,FALSE
+klara2,klara2_out_171212.txt,2014_radar.gpx,FALSE,,klara2_times.csv,TRUE
+anders1,anders1_out_171220.txt,anders1_track.p,FALSE,,anders1_times.csv,TRUE
