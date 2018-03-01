@@ -1,6 +1,0 @@
-name,radar_data,waypoints,tracks,doubled,wpt_sync,sync_file
-erik1,erik1_out_171212.txt,Marma17C Waypoints.gpx,MARMA17C.gpx,False,True,erik1_waypoints.csv
-erik2,erik2_out_171212.txt,Marma17C Waypoints.gpx,MARMA17C.gpx,False,True,erik2_waypoints.csv
-erik3,erik3_out_171212.txt,Marma17C Waypoints.gpx,MARMA17C.gpx,False,True,erik3_waypoints.csv
-klara2,klara2_out_171212.txt,,2014_radar.gpx,True,False,klara2_times.csv
-anders1,anders1_out_171220.txt,,anders1_track.p,True,False,anders1_times.csv
